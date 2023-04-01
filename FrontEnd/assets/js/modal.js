@@ -41,79 +41,79 @@ function openModal() {
 	editModal.querySelector('#add-picture').addEventListener('click', openUploadModalPage);
 	editModal.querySelector('.previous-modal').addEventListener('click', closeUploadModalPage);
 
-	// Add event to delete gallery
+	// Ajouter un événement pour supprimer la galerie
 	editModal.querySelector('#delete-gallery').addEventListener('click', deleteAll);
 
-	// Add event for picture preview
+	// Ajouter un événement pour l'aperçu de l'image
 	editModal.querySelector('#image').addEventListener('change', updatePicturePreview);
 
-	// Add events for enabling form submit
+	// Ajout des événements pour activer la soumission de formulaire
 	editModal.querySelector('#image').addEventListener('change', enableUpload);
 	editModal.querySelector('#title').addEventListener('input', enableUpload);
 	editModal.querySelector('#category').addEventListener('change', enableUpload);
 
-	// Add event for form submit
+	// Ajout un événement pour la soumission du formulaire
 	editModal.querySelector('form').addEventListener('submit', uploadWork);
 
-	// Disabling focusability on elements outside modal
+	// Désactivation de la focalisation sur les éléments hors modal
 	for (let element of focusElements) {
 		element.setAttribute('tabindex', -1);
 	}
 
-	// Add gallery
+	// Ajout une galerie
 	createEditGallery(works);
 
-    //Add categories to form
+    //Ajout des catégories au formulaire
 	fetchCategories();
 }
 
 function closeModal() {
-	// Hide modal (with delay for animation) and change attributes for accessibility
+	// Masquer modal (avec délai pour l'animation) et modifier les attributs pour l'accessibilité
 	const editModal = document.querySelector('#edit-modal');
 	window.setTimeout(() => (editModal.style.display = null), 300);
 	editModal.setAttribute('aria-hidden', true);
 	editModal.removeAttribute('aria-modal');
 
-	// Remove events to close modal
+	// Supprimer les événements pour fermer le modal
 	editModal.removeEventListener('click', closeModal);
 	editModal.querySelectorAll('.close-modal').forEach((button) => button.removeEventListener('click', closeModal));
 	editModal.querySelector('.modal-wrapper').removeEventListener('click', stopPropagation);
 
-	// Remove events to change page
+	// Supprimer les événements pour changer de page
 	editModal.querySelector('#add-picture').removeEventListener('click', openUploadModalPage);
 	editModal.querySelector('.previous-modal').removeEventListener('click', closeUploadModalPage);
 
-	// Remove event to delete gallery
+	// Supprimer l'événement pour supprimer la galerie
 	editModal.querySelector('#delete-gallery').removeEventListener('click', deleteAll);
 
-	// Remove event for picture preview
+	// Supprimer l'événement pour l'aperçu de l'image
 	editModal.querySelector('#image').removeEventListener('change', updatePicturePreview);
 
-	// Remove event for form submit
+	// Supprimer l'événement pour la soumission du formulaire
 	editModal.querySelector('form').removeEventListener('submit', uploadWork);
 
-	// Enabling focusability on elements outside modal
+	// Activation de la focalisation sur des éléments hors modal
 	for (let element of focusElements) {
 		element.removeAttribute('tabindex');
 	}
 
-	// Remove gallery
+	// Supprimer la galerie
 	const gallery = editModal.querySelector('.edit-gallery');
 	gallery.innerHTML = '';
 
-	// Remove categories from form
+	// Supprimer les catégories du formulaire
 	const selectCategory = editModal.querySelector('#category');
 	selectCategory.innerHTML = '';
 }
 
 
-// Function used to make sure click on modal wrapper wont close modal
+//Fonction utilisée pour s'assurer que cliquer sur le wrapper modal ne fermera pas la modal
 function stopPropagation(event) {
 	event.stopPropagation();
 }
 
 
-// Opening page for upload
+//Page d'ouverture pour le téléchargement
 function openUploadModalPage() {
 	const galleryPage = document.querySelector('#gallery-modal-container');
 	const uploadPage = document.querySelector('#add-picture-modal-container');
@@ -125,7 +125,7 @@ function openUploadModalPage() {
 	uploadPage.removeAttribute('aria-hidden');
 }
 
-// Closing page for upload
+// Fermeture de la page pour le téléchargement
 function closeUploadModalPage() {
 	const galleryPage = document.querySelector('#gallery-modal-container');
 	const uploadPage = document.querySelector('#add-picture-modal-container');
@@ -137,19 +137,19 @@ function closeUploadModalPage() {
 	uploadPage.setAttribute('aria-hidden', true);
 }
 
-// Add event to edit button for openning modal
+// Ajouter un événement au bouton d'édition pour l'ouverture modale
 const editWorksButton = document.querySelector('#edit-works');
 editWorksButton.addEventListener('click', openModal);
 
 
-// Add event to escape key for closing modal
+//Ajouter un événement à la touche d'échappement pour fermer la modal
 window.addEventListener('keydown', (event) => {
 	if (event.key === 'Escape' || event.key === 'Esc') {
 		closeModal(event);
 	}
 });
 
-// Fetching all works from API
+// Récupérer toutes les works de l'API
 let works;
 fetchWorks();
 async function fetchWorks() {
@@ -157,7 +157,7 @@ async function fetchWorks() {
 	works = await responseWorks.json();
 }
 
-// Function that creates gallery using an array of works
+// Fonction qui crée une galerie en utilisant un tableau
 function createEditGallery(works) {
 	const gallery = document.querySelector('.edit-gallery');
 
@@ -195,7 +195,7 @@ function createEditGallery(works) {
 }
 
 
-// Function that creates gallery using an array of works
+// Fonction qui crée une galerie en utilisant un tableau 
 function createGallery(works) {
 	const gallery = document.querySelector('.gallery');
 
@@ -214,7 +214,7 @@ function createGallery(works) {
 		figure.appendChild(figcaption);
 	}
 }
-// Function to delete a project
+// Fonction pour supprimer un projet
 async function deleteWork(id) {
 	const token = sessionStorage.getItem('token');
 
@@ -231,7 +231,7 @@ async function deleteWork(id) {
 	});
 }
 
-// Function to delete all projects
+// Fonction pour supprimer tous les projets
 async function deleteAll(event) {
 	event.preventDefault();
 
@@ -252,7 +252,7 @@ async function deleteAll(event) {
 	});
 }
 
-// Adding preview for file upload
+// Ajout d'un aperçu pour le téléchargement de fichiers
 function updatePicturePreview() {
 	const pictureInput = document.querySelector('#image');
 	const picturePreview = document.querySelector('#picture-preview');
@@ -261,7 +261,7 @@ function updatePicturePreview() {
 	picturePreview.style.opacity = 0;
 
 	if (pictureInput.files.length > 0) {
-		// Alert if file is not valid type or size
+		// Alerte si le type ou la taille du fichier n'est pas valide
 		if (!isValidFileType(pictureInput.files[0]) || pictureInput.files[0].size > 4194304) {
 			displayAlertBox('error', "Le fichier sélectionné n'est pas conforme", 3000);
 			pictureInput.value = null;
@@ -277,7 +277,7 @@ function updatePicturePreview() {
 	}
 }
 
-// Checking type of file
+// Vérification du type de fichier
 function isValidFileType(file) {
 	const validFileTypes = ['image/jpeg', 'image/png'];
 
@@ -290,7 +290,7 @@ function isValidFileType(file) {
 	return false;
 }
 
-// Enable upload form if all informations are filled
+// Activer le formulaire de téléchargement si toutes les informations sont renseignées
 function enableUpload() {
 	const form = document.querySelector('#add-picture-modal-container').querySelector('form');
 	const fileInput = form.querySelector('#image');
@@ -300,7 +300,7 @@ function enableUpload() {
 	form.querySelector('input[type="submit"]').disabled = !(fileInput.files.length > 0 && titleInput.value.length > 0 && categoryInput.value > 0);
 }
 
-// Upload new work
+// Télécharger un nouveau work
 async function uploadWork(event) {
 	event.preventDefault();
 
@@ -314,7 +314,7 @@ async function uploadWork(event) {
 	});
 
 	if (responseUpload.status === 201) {
-		// Empty form inputs
+		// Entrées de formulaire vides
 		const form = event.target;
 		form.image.value = null;
 		form.title.value = null;
@@ -323,7 +323,7 @@ async function uploadWork(event) {
 
 		closeModal();
 
-		// Refresh gallery
+		// Actualiser la galerie
 		document.querySelector('.gallery').innerHTML = '';
 		fetchWorks().then(() => {
 			createGallery(works);

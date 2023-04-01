@@ -10,11 +10,16 @@
 	<link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=Work+Sans&display=swap"
 		rel="stylesheet">
 	<meta name="description" content="">
-	<script src="https://kit.fontawesome.com/2a46f23cdb.js" crossorigin="anonymous"></script>
+	<script src="https://kit.fontawesome.com/cc75d89bda.js" crossorigin="anonymous"></script>
 	<link rel="stylesheet" href="./assets/style.css">
 </head>
 
 <body>
+	<div id="edit-banner" aria-hidden="true">
+		<i class="fa-regular fa-pen-to-square"></i>
+		<p>Mode édition</p>
+		<button>publier les changements</button>
+	</div>
 	<header>
 		<h1>Sophie Bluel <span>Architecte d'intérieur</span></h1>
 		<nav>
@@ -42,8 +47,54 @@
 					décorateur(trice)</p>
 			</article>
 		</section>
+		<button class="edit" id="edit-profile" aria-hidden="true">
+			<i class="fa-regular fa-pen-to-square"></i>
+			modifier
+		</button>
+
+		<div id="edit-modal" class="modal" aria-hidden="true" role="dialog" aria-label="Fenêtre d'édition de la galerie photo">
+			<div class="modal-wrapper">
+				<div id="gallery-modal-container">
+					<button class="close-modal"><i class="fa-solid fa-xmark"></i></button>
+					<h3>Galerie photo</h3>
+					<div class="edit-gallery">
+
+					</div>
+					<button id="add-picture">Ajouter une photo</button>
+					<a id="delete-gallery" href="#">Supprimer la galerie</a>
+				</div>
+				<div id="add-picture-modal-container" aria-hidden="true">
+					<button class="previous-modal"><i class="fa-solid fa-arrow-left"></i></button>
+					<button class="close-modal"><i class="fa-solid fa-xmark"></i></button>
+					<h3>Ajout photo</h3>
+					<form action="#" method="post">
+						<div id="add-picture-container">
+							<i class="fa-regular fa-image"></i>
+							<label for="image" class="file-upload">
+								+ Ajouter photo
+							</label>
+							<input type="file" name="image" id="image" accept=".jpeg, .jpg, .png" required>
+							jpg, png : 4mo max
+							<div id="picture-preview"></div>
+						</div>
+						<label for="title">Titre</label>
+						<input type="text" name="title" id="title" required>
+						<label for="category">Catégorie</label>
+						<select name="category" id="category" required>
+						</select>
+						<div class="grey-line"></div>
+						<input type="submit" value="Valider" disabled>
+					</form>
+				</div>
+			</div>
+		</div>
+		
 		<section id="portfolio">
 			<h2>Mes Projets</h2>
+			<button class="edit" id="edit-works" aria-hidden="true">
+				<i class="fa-regular fa-pen-to-square"></i>
+				modifier
+			</button>
 			<div id="categories" class="filters"></div>
 			<div id="works" class="gallery">
 			</div>
@@ -63,6 +114,7 @@
 		</section>
 	</main>
 
+
 	<footer>
 		<nav>
 			<ul>
@@ -72,5 +124,6 @@
 	</footer>
 	<script src="./assets/js/index.js"></script>
 	<script src="./assets/js/admin.js"></script>
-
+	<script src="./assets/js/modal.js"></script>
+</body>
 </html>

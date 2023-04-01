@@ -14,7 +14,6 @@ const headers = {
     return { email: email.value, password: password.value };
   }
 
-
   function showErrorMsg(display) {
     if (!errorMsgElement) {
       errorMsgElement = document.createElement("p");
@@ -45,8 +44,8 @@ const headers = {
         headers,
         body: JSON.stringify(user),
       }).then(handleResponse);
-      sessionStorage.setItem("token", token); // 
-      location.href = "index.html"; //rediriger vers la page d'index
+      sessionStorage.setItem("token", token); 
+    location.href = "index.html"; //rediriger vers la page d'index
     } catch (err) {
       console.error(err); // mentionner l'erreur en cas d'erreur réseau ou d'identifiants de connexion invalides
       showErrorMsg(true); // message d'erreur 

@@ -2,6 +2,8 @@
 const token = sessionStorage.getItem("token");
 const editButtons = document.querySelectorAll('.edit');
 const editBanner = document.querySelector('#edit-banner');
+const filtersButtons = document.querySelector (".filters");
+
 /*modification du texte lorsque connecté*/
 function changeInnerHtml(element, newInnerHtml) {
     element.innerHTML = newInnerHtml;
@@ -29,5 +31,6 @@ if (token != null) {
 	editBanner.style.display = 'flex';
 	editBanner.removeAttribute('aria-hidden');
 
-
+    //Retrait des filtre bountons
+     filtersButtons.style.display = "None"; 
 }

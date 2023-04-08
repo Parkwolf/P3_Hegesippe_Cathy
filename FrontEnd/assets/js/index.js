@@ -15,7 +15,6 @@ fetch("http://localhost:5678/api/works", {
       const figcaptionItem = document.createElement("figcaption");
 
       //On cree les attribut pour la balise img
-     // imgItem.setAttribute("cross origin","anonymous");
 
       figcaptionItem.textContent = work.title;
       imgItem.src = `${work.imageUrl}`;
@@ -27,11 +26,8 @@ fetch("http://localhost:5678/api/works", {
   })
   .catch((error) => console.error(error));
 
-/* 
-Ce code effectue une requête GET pour récupérer des données JSON à partir de l'URL http://localhost:5678/api/works. Les données sont ensuite utilisées pour ajouter des éléments HTML à la page. Les options method et headers sont utilisées pour spécifier que nous voulons récupérer des données JSON avec la méthode GET et que le type de contenu des données est application/json. Une fois la réponse reçue, la méthode .json() est utilisée pour extraire les données JSON. Ensuite, chaque objet dans les données est parcouru avec une boucle forEach(), et pour chaque objet, un élément HTML de type figure est créé avec une image et une légende, qui sont ajoutés à la page. Si une erreur se produit, un message d'erreur est affiché dans la console du navigateur.
-*/
 
-//On récupère la liste de toutes les catégories//On récupère la liste de tout les works
+//On récupère la liste de toutes les catégories
 
 fetch("http://localhost:5678/api/categories",{
   method: "GET"
